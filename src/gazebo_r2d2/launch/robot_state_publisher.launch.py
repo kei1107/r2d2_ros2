@@ -4,8 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, Command
 
 import xacro
 
@@ -14,15 +13,7 @@ def generate_launch_description():
 
     urdf_prefix = get_package_share_directory('gazebo_r2d2')
     xacro_file = os.path.join(urdf_prefix,'urdf','r2d2.urdf.xacro')
-    urdf_file = os.path.join(urdf_prefix,'urdf','r2d2.urdf')
-
-    # load xacro
-    doc = xacro.process_file(xacro_file)
-    # generate urdf
-    robot_desc = doc.toprettyxml(indent='  ')
-    # write urdf file
-    with open(urdf_file,'w') as f:
-        f.write(robot_desc)
+    robot_description = {'robot_description' : Command(['xacro', ' ', xacro_file])}
     
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -34,8 +25,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{'use_sim_time': use_sim_time, 'robot_description': robot_desc}],
-            arguments=[urdf_file]),
+            parameters=[{'use_sim_time': use_sim_time}, robot_description]),
         Node(
             package='urdf_tutorial',
             executable='state_publisher',

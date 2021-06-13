@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="my_r2d2" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="r2d2" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- macro template -->
   <xacro:include filename="$(find gazebo_r2d2)/urdf/utils.urdf.xacro" />
