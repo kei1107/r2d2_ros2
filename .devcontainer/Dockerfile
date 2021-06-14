@@ -13,7 +13,8 @@ FROM athackst/ros2:foxy-dev
 # ENV DEBIAN_FRONTEND=dialog
 
 RUN apt-get update \
-        && apt -y install ros-foxy-xacro
+        && apt -y install ros-foxy-xacro \
+        && apt -y install ros-foxy-gazebo-ros
 
 # Set up auto-source of workspace for ros user
 ARG WORKSPACE
