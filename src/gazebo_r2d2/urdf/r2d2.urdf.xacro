@@ -1,78 +1,104 @@
 <?xml version="1.0"?>
 <robot name="r2d2" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!-- macro template -->
-  <xacro:include filename="$(find gazebo_r2d2)/urdf/utils.urdf.xacro" />
+  <xacro:property name="width" value="0.2" />
+  <xacro:property name="leglen" value="0.6" />
+  <xacro:property name="polelen" value="0.2" />
+  <xacro:property name="bodylen" value="0.6" />
+  <xacro:property name="baselen" value="0.4" />
+  <xacro:property name="wheeldiam" value="0.07" />
 
-  <!-- link -->
-  <xacro:link_cylinder_no_ineatia link_name="axis" radius="0.01" length="0.5">
-    <origin xyz="0 0 0" rpy="1.57 0 0" />
-  </xacro:link_cylinder_no_ineatia>
+  <xacro:include filename="$(find gazebo_r2d2)/urdf/utils.urdf.xacro"/>
 
-  <xacro:link_box link_name="leg1" width="0.20" height="0.10" depth="0.8">
-    <origin xyz="0 0 -0.3" />
-  </xacro:link_box>
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${width}" length="${bodylen}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${width}" length="${bodylen}"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="10"/>
+  </link>
 
-  <xacro:link_box link_name="leg2" width="0.20" height="0.10" depth="0.8">
-    <origin xyz="0 0 -0.3" />
-  </xacro:link_box>
+  <xacro:leg prefix="right" reflect="-1" />
+  <xacro:leg prefix="left" reflect="1" />
+ 
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="${width}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${width}"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="2"/>
+  </link>
 
-  <xacro:link_cylinder link_name="body" radius="0.20" length="0.6">
-      <origin xyz="0 0 -0.2" />
-  </xacro:link_cylinder>
-
-  <xacro:link_sphere link_name="head" radius="0.40">
-      <origin/>
-  </xacro:link_sphere>
-
-  <xacro:link_cylinder link_name="rod" radius="0.02" length="0.2">
-      <origin xyz="0 0 -0.1" />
-  </xacro:link_cylinder>
-
-  <xacro:link_box link_name="box" width="0.05" height="0.05" depth="0.05">
-      <origin/>
-  </xacro:link_box>
-  
-  <!-- joint -->
-  <joint name="leg1connect" type="fixed">
-    <origin xyz="0 .30 0" />
-    <parent link="axis"/>
-    <child link="leg1"/>
-  </joint>
-
-  <joint name="leg2connect" type="fixed">
-    <origin xyz="0 -.30 0" />
-    <parent link="axis"/>
-    <child link="leg2"/>
-  </joint>
-
-  <joint name="tilt" type="revolute">
-    <parent link="axis"/>
-    <child link="body"/>
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <axis xyz="0 1 0" />
-    <limit upper="0" lower="-.5" effort="10" velocity="10" />
-  </joint>
-
-  <joint name="swivel" type="continuous">
-    <origin xyz="0 0 0.1" />
-    <axis xyz="0 0 1" />
-    <parent link="body"/>
+  <joint name="head_swivel" type="fixed">
+    <parent link="base_link"/>
     <child link="head"/>
+    <origin xyz="0 0 ${bodylen/2}"/>
   </joint>
+  <link name="box">
+    <visual>
+      <geometry>
+        <box size="0.08 0.08 0.08"/>
+      </geometry>
+      <material name="blue"/>
+      <origin xyz="-0.04 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.08 0.08 0.08"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="1"/>
+  </link>
 
-  <joint name="periscope" type="prismatic">
-    <origin xyz=".12 0 .15" />
-    <axis xyz="0 0 1" />
-    <limit upper="0" lower="-.5" effort="10" velocity="10" />
+  <joint name="tobox" type="fixed">
     <parent link="head"/>
-    <child link="rod"/>
+    <child link="box"/>
+    <origin xyz="${.707*width+0.04} 0 ${.707*width}"/>
   </joint>
 
-  <joint name="boxconnect" type="fixed">
-    <origin xyz="0 0 0" />
-    <parent link="rod"/>
-    <child link="box"/>
-  </joint>
+  <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+
+    <plugin name='front_diff_drive' filename='libgazebo_ros_diff_drive.so'>
+
+      <update_rate>50</update_rate>
+      <left_joint>left_front_wheel_joint</left_joint>
+      <right_joint>right_front_wheel_joint</right_joint>
+      <wheel_separation>${width}</wheel_separation>
+      <wheel_diameter>${wheeldiam/2}</wheel_diameter>
+      <robot_base_frame>base_link</robot_base_frame>
+			<publishWheelJointState>true</publishWheelJointState>
+
+    </plugin>
+
+    <plugin name='back_diff_drive' filename='libgazebo_ros_diff_drive.so'>
+
+      <update_rate>50</update_rate>
+      <left_joint>left_back_wheel_joint</left_joint>
+      <right_joint>right_back_wheel_joint</right_joint>
+
+      <wheel_separation>${width}</wheel_separation>
+      <wheel_diameter>${wheeldiam/2}</wheel_diameter>
+      <robot_base_frame>base_link</robot_base_frame>
+			<publishWheelJointState>true</publishWheelJointState>
+    </plugin>
+  </gazebo>
 
 </robot>

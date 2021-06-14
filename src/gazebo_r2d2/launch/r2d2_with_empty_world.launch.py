@@ -33,21 +33,19 @@ def generate_launch_description():
                 os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
             ),
         ),
-        
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
             name='spawn_entity',
             output='screen',
             arguments=[
-                '-entity', 'r2d2',
+                '-entity', 'vmegarover',
                 '-x', '0',
                 '-y', '0',
                 '-z', '1',
                 '-file', urdf_file,
             ]
         ),
-
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([launch_file_dir, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),

@@ -27,8 +27,9 @@ def generate_launch_description():
             output='screen',
             parameters=[{'use_sim_time': use_sim_time}, robot_description]),
         Node(
-            package='urdf_tutorial',
-            executable='state_publisher',
-            name='state_publisher',
-            output='screen'),
+            package='joint_state_publisher',
+            executable='joint_state_publisher',
+            name='joint_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time}]),
     ])
