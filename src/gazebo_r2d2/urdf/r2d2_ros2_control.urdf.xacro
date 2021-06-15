@@ -8,7 +8,7 @@
   <xacro:property name="baselen" value="0.4" />
   <xacro:property name="wheeldiam" value="0.07" />
 
-  <xacro:include filename="$(find gazebo_r2d2)/urdf/utils.urdf.xacro"/>
+  <xacro:include filename="$(find gazebo_r2d2)/urdf/utils_ros2_control.urdf.xacro"/>
 
   <link name="base_link">
     <visual>
@@ -70,34 +70,14 @@
     <origin xyz="${.707*width+0.04} 0 ${.707*width}"/>
   </joint>
 
-  <!-- Gazebo plugin for ROS Control -->
+  <!-- Gazebo plugin for ROS2 Control -->
   <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-
-    <plugin name='front_diff_drive' filename='libgazebo_ros_diff_drive.so'>
-
-      <update_rate>50</update_rate>
-      <left_joint>left_front_wheel_joint</left_joint>
-      <right_joint>right_front_wheel_joint</right_joint>
-      <wheel_separation>${width}</wheel_separation>
-      <wheel_diameter>${wheeldiam/2}</wheel_diameter>
-      <robot_base_frame>base_link</robot_base_frame>
-			<publishWheelJointState>true</publishWheelJointState>
-
-    </plugin>
-
-    <plugin name='back_diff_drive' filename='libgazebo_ros_diff_drive.so'>
-
-      <update_rate>50</update_rate>
-      <left_joint>left_back_wheel_joint</left_joint>
-      <right_joint>right_back_wheel_joint</right_joint>
-
-      <wheel_separation>${width}</wheel_separation>
-      <wheel_diameter>${wheeldiam}</wheel_diameter>
-      <robot_base_frame>base_link</robot_base_frame>
-			<publishWheelJointState>true</publishWheelJointState>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <!-- <robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type>
+      <robotNamespace>/r2d2</robotNamespace>
+      <parameters> $(find gazebo_r2d2)/config/diff_drive_controller.yaml </parameters>
+      <control_period>0.01</control_period>
+      <e_stop_topic>/estop</e_stop_topic>     -->
     </plugin>
   </gazebo>
 
