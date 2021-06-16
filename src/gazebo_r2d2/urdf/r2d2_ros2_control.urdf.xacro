@@ -73,11 +73,7 @@
   <!-- Gazebo plugin for ROS2 Control -->
   <gazebo>
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-      <!-- <robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type>
-      <robotNamespace>/r2d2</robotNamespace>
-      <parameters> $(find gazebo_r2d2)/config/diff_drive_controller.yaml </parameters>
-      <control_period>0.01</control_period>
-      <e_stop_topic>/estop</e_stop_topic>     -->
+      <!-- <parameters> $(find gazebo_r2d2)/config/diff_drive_controller.yaml </parameters> -->
     </plugin>
   </gazebo>
 

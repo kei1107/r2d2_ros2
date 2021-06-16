@@ -20,14 +20,17 @@ front_back_diff_drive_controller:
     # left_wheel_radius_multiplier: 1.0
     # right_wheel_radius_multiplier: 1.0
 
-    # odom_frame_id: odom
+    odom_frame_id: odom
     base_frame_id: base_link
 
-    # pose_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    # twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
 
-    # open_loop: true
-    enable_odom_tf: false
+    open_loop: true
+    enable_odom_tf: true
+
+    publish_cmd: true
+    publish_wheel_data: true
 
     # cmd_vel_timeout: 500 # milliseconds
     # publish_limited_velocity: true

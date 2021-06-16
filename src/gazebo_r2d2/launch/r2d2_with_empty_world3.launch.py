@@ -21,6 +21,8 @@ def generate_launch_description():
 
     robot_controller = 'front_back_diff_drive_controller'
     config_file = os.path.join(gazebo_r2d2_prefix,'config','diff_drive_controller.yaml')
+
+    rviz_file = os.path.join(gazebo_r2d2_prefix,'config','r2d2.rviz')
     return LaunchDescription([
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -68,5 +70,12 @@ def generate_launch_description():
             executable='spawner.py',
             name="controller_spawner",
             arguments=[robot_controller]
+        ),
+
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', rviz_file]
         )
     ])

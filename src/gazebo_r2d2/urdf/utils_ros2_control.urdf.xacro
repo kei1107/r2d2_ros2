@@ -59,6 +59,13 @@
     <ros2_control name="${prefix}_${suffix}_wheel_trans" type="system">
       <hardware>
         <plugin>test_system</plugin>
+        <!-- <plugin>fake_components/GenericSystem</plugin> -->
+        <!-- <plugin>gazebo_ros2_control/GazeboSystem</plugin> -->
+
+          <!-- <plugin>ros2_control_demo_hardware/DiffBotSystemHardware</plugin>
+          <param name="example_param_hw_start_duration_sec">2.0</param>
+          <param name="example_param_hw_stop_duration_sec">3.0</param> -->
+
       </hardware>
 
       <joint name="${prefix}_${suffix}_wheel_joint">
