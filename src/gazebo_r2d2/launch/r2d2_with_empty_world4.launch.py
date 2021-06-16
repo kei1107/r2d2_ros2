@@ -15,7 +15,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     gazebo_r2d2_prefix = get_package_share_directory('gazebo_r2d2')
-    xacro_file = os.path.join(gazebo_r2d2_prefix,'urdf','r2d2_ros2_control.urdf.xacro')
+    xacro_file = os.path.join(gazebo_r2d2_prefix,'urdf','r2d2_ros2_control_with_my_plugin.urdf.xacro')
     robot_description = {'robot_description' : Command(['xacro', ' ', xacro_file])}
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
 

@@ -2,18 +2,14 @@ controller_manager:
   ros__parameters:
       update_rate: 100 # Hz
 
-      front_diff_drive_controller:
+      front_back_diff_drive_controller:
         type: diff_drive_controller/DiffDriveController
-      
-      # back_diff_drive:
-      #   type: diff_drive_controller/DiffDriveController
 
 
-front_diff_drive_controller:
+front_back_diff_drive_controller:
   ros__parameters:
-    front_diff_drive.type: diff_drive_controller/DiffDriveController
-    left_wheel_names: ["left_front_wheel_joint"]
-    right_wheel_names: ["right_front_wheel_joint"]
+    left_wheel_names: ["left_front_wheel_joint", "left_back_wheel_joint"]
+    right_wheel_names: ["right_front_wheel_joint", "right_back_wheel_joint"]
     # write_op_modes: ["motor_controller"]
 
     wheel_separation: 0.2
@@ -55,13 +51,3 @@ front_diff_drive_controller:
     # angular.z.min_acceleration: 0.0
     # angular.z.max_jerk: 0.0
     # angular.z.min_jerk: 0.0
-
-# back_diff_drive:
-#   ros__parameters:
-#     left_wheel_names: ["left_back_wheel_joint"]
-#     right_wheel_names: ["right_back_wheel_joint"]
-
-#     wheel_separation: 0.2
-#     wheel_radius: 0.07
-#     base_frame_id: base_link
-#     enable_odom_tf: false

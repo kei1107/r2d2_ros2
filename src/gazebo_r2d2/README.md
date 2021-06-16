@@ -40,4 +40,4 @@ https://jeffzzq.medium.com/designing-a-ros2-robot-7c31a62c535a
 
 https://github.com/ros-planning/navigation2/issues/1594
 
-`ros2 run my_teleop_twist_keyboard my_teleop_twist_keyboard --ros-args --remap cmd_vel:=/front_diff_drive_controller/cmd_vel`
+`ros2 run my_teleop_twist_keyboard my_teleop_twist_keyboard --ros-args -r cmd_vel:=/front_diff_drive_controller/cmd_vel`
