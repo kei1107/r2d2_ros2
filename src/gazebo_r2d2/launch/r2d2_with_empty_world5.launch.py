@@ -15,14 +15,18 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     gazebo_r2d2_prefix = get_package_share_directory('gazebo_r2d2')
-    xacro_file = os.path.join(gazebo_r2d2_prefix,'urdf','r2d2_ros2_control.urdf.xacro')
+    xacro_file = os.path.join(gazebo_r2d2_prefix,'urdf','r2d2_ros2_control_with_my_plugin.urdf.xacro')
     robot_description = {'robot_description' : Command(['xacro', ' ', xacro_file])}
+    pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
 
     robot_controller = 'front_back_diff_drive_controller'
     config_file = os.path.join(gazebo_r2d2_prefix,'config','diff_drive_controller.yaml')
-
-    rviz_file = os.path.join(gazebo_r2d2_prefix,'config','r2d2.rviz')
     return LaunchDescription([
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
+            ),
+        ),
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
@@ -35,18 +39,19 @@ def generate_launch_description():
             name='joint_state_publisher',
             output='screen',
             parameters=[{'use_sim_time': use_sim_time}]),
-        # Node(
-        #     package='gazebo_ros',
-        #     executable='spawn_entity.py',
-        #     name='spawn_entity',
-        #     output='screen',
-        #     arguments=[
-        #         '-entity', 'r2d2',
-        #         '-x', '0',
-        #         '-y', '0',
-        #         '-z', '1',
-        #         '-topic', '/robot_description'
-        #     ]),
+        Node(
+            package='gazebo_ros',
+            executable='spawn_entity.py',
+            name='spawn_entity',
+            output='screen',
+            arguments=[
+                '-entity', 'r2d2',
+                '-x', '0',
+                '-y', '0',
+                '-z', '1',
+                '-topic', '/robot_description'
+            ]),
+
 
         # controller
         Node(
@@ -63,12 +68,5 @@ def generate_launch_description():
             executable='spawner.py',
             name="controller_spawner",
             arguments=[robot_controller]
-        ),
-
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_file]
         )
     ])
