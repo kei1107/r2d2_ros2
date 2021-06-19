@@ -12,7 +12,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     urdf_prefix = get_package_share_directory('r2d2_control')
-    xacro_file = os.path.join(urdf_prefix,'urdf','r2d2.urdf.xacro')
+    xacro_file = os.path.join(urdf_prefix,'urdf','r2d2_ros_control.urdf.xacro')
     robot_description = {'robot_description' : Command(['xacro', ' ', xacro_file])}
     
     return LaunchDescription([

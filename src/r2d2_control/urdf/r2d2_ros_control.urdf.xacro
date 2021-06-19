@@ -8,7 +8,7 @@
   <xacro:property name="baselen" value="0.4" />
   <xacro:property name="wheeldiam" value="0.07" />
 
-  <xacro:include filename="$(find r2d2_control)/urdf/utils.urdf.xacro"/>
+  <xacro:include filename="$(find r2d2_control)/urdf/utils_ros_control.urdf.xacro"/>
 
   <link name="base_link">
     <visual>
@@ -73,31 +73,40 @@
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+      <robotNamespace>/r2d2</robotNamespace>
     </plugin>
 
-    <plugin name='front_diff_drive' filename='libgazebo_ros_diff_drive.so'>
-
+    <!-- https://github.com/ros-simulation/gazebo_ros_pkgs/wiki -->
+    <!-- https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Skid-Steer-drive -->
+    <plugin name='r2d2_diff_drive' filename='libgazebo_ros_diff_drive.so'>
+      <!-- Update rate -->
       <update_rate>50</update_rate>
+
+      <!-- Number of wheel pairs -->
+      <num_wheel_pairs>2</num_wheel_pairs>
+
+      <!-- wheels0 -->
       <left_joint>left_front_wheel_joint</left_joint>
       <right_joint>right_front_wheel_joint</right_joint>
-      <wheel_separation>${width}</wheel_separation>
-      <wheel_diameter>${wheeldiam/2}</wheel_diameter>
-      <robot_base_frame>base_link</robot_base_frame>
-			<publishWheelJointState>true</publishWheelJointState>
 
-    </plugin>
-
-    <plugin name='back_diff_drive' filename='libgazebo_ros_diff_drive.so'>
-
-      <update_rate>50</update_rate>
+      <!-- wheels1-->
       <left_joint>left_back_wheel_joint</left_joint>
       <right_joint>right_back_wheel_joint</right_joint>
 
+      <!-- kinematics -->
       <wheel_separation>${width}</wheel_separation>
+      <wheel_separation>${width}</wheel_separation>
+
       <wheel_diameter>${wheeldiam}</wheel_diameter>
+      <wheel_diameter>${wheeldiam}</wheel_diameter>
+
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+
+      <odometry_frame>odom</odometry_frame>
       <robot_base_frame>base_link</robot_base_frame>
-			<publishWheelJointState>true</publishWheelJointState>
     </plugin>
   </gazebo>
 

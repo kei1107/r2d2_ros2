@@ -54,19 +54,6 @@
       <kd value="1.0" />
       <material>Gazebo/Grey</material>
     </gazebo>
-
-    <!-- This block connects the wheel joint to an actuator (motor), which informs both
-    simulation and visualization of the robot -->
-    <transmission name="${prefix}_${suffix}_wheel_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <actuator name="${prefix}_${suffix}_wheel_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-      <joint name="${prefix}_${suffix}_wheel_joint">
-        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-      </joint>
-    </transmission>
-
   </xacro:macro>
 
   <xacro:macro name="leg" params="prefix reflect">
