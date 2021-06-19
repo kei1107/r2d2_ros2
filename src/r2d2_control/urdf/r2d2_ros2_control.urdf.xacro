@@ -72,9 +72,9 @@
 
   <!-- Gazebo plugin for ROS2 Control -->
   <gazebo>
-    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-      <!-- <parameters> $(find gazebo_r2d2)/config/diff_drive_controller.yaml </parameters> -->
-    </plugin>
+    <!-- <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters> $(find gazebo_r2d2)/config/diff_drive_controller.yaml </parameters>
+    </plugin> -->
   </gazebo>
 
 </robot>

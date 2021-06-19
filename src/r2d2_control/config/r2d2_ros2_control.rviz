@@ -121,6 +121,60 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_link:
+          Value: true
+        box:
+          Value: true
+        head:
+          Value: true
+        left_back_wheel:
+          Value: true
+        left_base:
+          Value: true
+        left_front_wheel:
+          Value: true
+        left_leg:
+          Value: true
+        odom:
+          Value: true
+        right_back_wheel:
+          Value: true
+        right_base:
+          Value: true
+        right_front_wheel:
+          Value: true
+        right_leg:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        odom:
+          base_link:
+            head:
+              box:
+                {}
+            left_leg:
+              left_base:
+                left_back_wheel:
+                  {}
+                left_front_wheel:
+                  {}
+            right_leg:
+              right_base:
+                right_back_wheel:
+                  {}
+                right_front_wheel:
+                  {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -198,5 +252,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 72
-  Y: 60
+  X: 510
+  Y: 69
