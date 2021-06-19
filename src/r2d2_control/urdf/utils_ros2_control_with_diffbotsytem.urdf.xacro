@@ -54,25 +54,33 @@
       <kd value="1.0" />
       <material>Gazebo/Grey</material>
     </gazebo>
+  </xacro:macro>
 
-
-    <ros2_control name="${prefix}_${suffix}_wheel_system" type="system">
+  <xacro:macro name="ros2_control_system" params="suffix">
+    <ros2_control name="${suffix}_wheel_system" type="system">
+      <!-- Need clone and build https://github.com/ros-controls/ros2_control_demos -->
       <hardware>
-        <plugin>fake_components/GenericSystem</plugin>
+        <plugin>ros2_control_demo_hardware/DiffBotSystemHardware</plugin>
+        <param name="example_param_hw_start_duration_sec">2.0</param>
+        <param name="example_param_hw_stop_duration_sec">3.0</param>
       </hardware>
 
       <!-- for diff_drive_controller -->
       <!-- https://github.com/ros-controls/ros2_controllers/blob/master/diff_drive_controller/src/diff_drive_controller.cpp#L122-L144 -->
       <!-- Need velocity command interface and position state interface-->
-      <joint name="${prefix}_${suffix}_wheel_joint">
-        <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max"> 1</param>
-        </command_interface>
+      <joint name="left_${suffix}_wheel_joint">
+        <command_interface name="velocity" />
+        <!-- DiffBotSystemHardware need two states -->
+        <!-- first position, second velocity -->
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="right_${suffix}_wheel_joint">
+        <command_interface name="velocity" />
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
     </ros2_control>
-
   </xacro:macro>
 
   <xacro:macro name="leg" params="prefix reflect">
