@@ -1,13 +1,13 @@
 from setuptools import setup
 
-package_name = 'my_teleop_twist_keyboard'
+package_name = 'teleop_twiststamped_keyboard'
 
 setup(
     name=package_name,
     version='2.3.2',
     packages=[],
     py_modules=[
-        'my_teleop_twist_keyboard'
+        'teleop_twiststamped_keyboard'
     ],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -32,7 +32,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'my_teleop_twist_keyboard = my_teleop_twist_keyboard:main'
+            'teleop_twiststamped_keyboard = teleop_twiststamped_keyboard:main'
         ],
     },
 )

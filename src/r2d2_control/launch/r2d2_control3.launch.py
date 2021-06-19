@@ -14,14 +14,14 @@ import xacro
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
-    gazebo_r2d2_prefix = get_package_share_directory('gazebo_r2d2')
-    xacro_file = os.path.join(gazebo_r2d2_prefix,'urdf','r2d2_ros2_control.urdf.xacro')
+    r2d2_control_prefix = get_package_share_directory('r2d2_control')
+    xacro_file = os.path.join(r2d2_control_prefix,'urdf','r2d2_ros2_control.urdf.xacro')
     robot_description = {'robot_description' : Command(['xacro', ' ', xacro_file])}
 
     robot_controller = 'front_back_diff_drive_controller'
-    config_file = os.path.join(gazebo_r2d2_prefix,'config','diff_drive_controller.yaml')
+    config_file = os.path.join(r2d2_control_prefix,'config','diff_drive_controller.yaml')
 
-    rviz_file = os.path.join(gazebo_r2d2_prefix,'config','r2d2.rviz')
+    rviz_file = os.path.join(r2d2_control_prefix,'config','r2d2.rviz')
     return LaunchDescription([
         Node(
             package='robot_state_publisher',

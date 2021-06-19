@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>my_teleop_twist_keyboard</name>
+  <name>teleop_twiststamped_keyboard</name>
   <version>2.3.2</version>
   <description>
     A robot-agnostic teleoperation node to convert keyboard commands to Twist
