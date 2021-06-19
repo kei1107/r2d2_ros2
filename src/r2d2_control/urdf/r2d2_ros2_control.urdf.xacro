@@ -8,7 +8,7 @@
   <xacro:property name="baselen" value="0.4" />
   <xacro:property name="wheeldiam" value="0.07" />
 
-  <xacro:include filename="$(find gazebo_r2d2)/urdf/utils_ros2_control.urdf.xacro"/>
+  <xacro:include filename="$(find r2d2_control)/urdf/utils_ros2_control.urdf.xacro"/>
 
   <link name="base_link">
     <visual>
