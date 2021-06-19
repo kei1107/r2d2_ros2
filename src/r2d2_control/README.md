@@ -1,3 +1,39 @@
+## r2d2_control4.launch.py (ros2_control_demo)
+
+```shell
+$ git clone https://github.com/ros-controls/ros2_control_demos
+$ colcon_cd
+$ colcon build --symlink-install
+```
+
+
+## r2d2_control6.launch.py (gazebo_ros2_control)
+
+```shell
+$ git clone https://github.com/ros-simulation/gazebo_ros2_control
+$ cd gazebo_ros2_control
+$ git checkout 956e7706338fd4fd1a2ef733ad54740d07e9a67a
+$ colcon_cd
+$ colcon build --symlink-install
+$ source install/setup.bash
+
+
+$ ros2 launch r2d2_control r2d2_control6.launch.py use_rviz:=false
+$ colcon_cd r2d2_control
+
+[WARN!!!!]
+# https://github.com/ros-controls/ros2_control/commit/98650ab73110a751e81f423e0c4fa4931d905799
+$ sudo cp /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py.old 
+$ sudo cp ./extra/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py
+
+$ ros2 launch r2d2_control r2d2_control6.launch.py use_rviz:=false
+
+
+$ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
+```
+
+---
+
 memo
 
 `ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel`
