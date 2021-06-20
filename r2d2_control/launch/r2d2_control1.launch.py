@@ -50,6 +50,7 @@ def generate_launch_description():
                 '-x', '0',
                 '-y', '0',
                 '-z', '1',
+                # '-file', urdf_file,
                 '-file', urdf_file,
             ]
         ),

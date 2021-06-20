@@ -59,6 +59,8 @@ Description: Utilities to interface with Gazebo through ROS.
 
 ```shell
 $ git clone https://github.com/ros-controls/ros2_control_demos
+$ cd ros2_control_demos
+$ git checkout 2dc7c3717c1ceaaabd1576033d3f33b8c09882f6
 $ colcon_cd
 $ colcon build --symlink-install
 ```
@@ -114,11 +116,7 @@ https://github.com/ros-controls/ros2_control_demos
 
 https://rt-net.jp/humanoid/archives/3571
 
-https://pal-robotics.com/collaborative-projects/ros-control-ros2/
-
 https://ros-controls.github.io/control.ros.org/index.html
-
-
 
 
 

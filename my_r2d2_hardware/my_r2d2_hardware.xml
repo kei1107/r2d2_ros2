@@ -1,0 +1,9 @@
+<library path="my_r2d2_hardware">
+  <class name="my_r2d2_hardware/MyR2D2Hardware"
+         type="my_r2d2_hardware::MyR2D2Hardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ROS2 Control minimal r2d2 protocol.
+    </description>
+  </class>
+</library>
