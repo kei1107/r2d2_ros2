@@ -12,6 +12,8 @@ FROM athackst/ros2:foxy-dev
 #    && rm -rf /var/lib/apt/lists/*
 # ENV DEBIAN_FRONTEND=dialog
 
+RUN sudo sed -i.bak -e 's%http://[^ ]\+%mirror://mirrors.ubuntu.com/mirrors.txt%g' /etc/apt/sources.list
+
 RUN apt-get update \
         && apt -y install ros-foxy-xacro \
         && apt -y install ros-foxy-gazebo-ros

@@ -1,3 +1,45 @@
+```
+ubuntu@ubuntu-VirtualBox:~$ cat /etc/lsb-release 
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04.2 LTS"
+```
+
+```
+ubuntu@ubuntu-VirtualBox:~$ sudo apt show ros-foxy-ros2-control
+Package: ros-foxy-ros2-control
+Version: 0.6.1-1focal.20210601.154047
+Priority: optional
+Section: misc
+Maintainer: Bence Magyar <bence.magyar.robotics@gmail.com>
+Installed-Size: 39.9 kB
+Depends: ros-foxy-controller-interface, ros-foxy-controller-manager, ros-foxy-hardware-interface, ros-foxy-ros2-control-test-assets, ros-foxy-ros2controlcli, ros-foxy-ros-workspace
+Download-Size: 5,224 B
+APT-Manual-Installed: yes
+APT-Sources: http://packages.ros.org/ros2/ubuntu focal/main amd64 Packages
+Description: Metapackage for ROS2 control related packages
+```
+
+```
+ubuntu@ubuntu-VirtualBox:~$ sudo apt show ros-foxy-ros2-controllers 
+Package: ros-foxy-ros2-controllers
+Version: 0.3.1-1focal.20210601.154705
+Priority: optional
+Section: misc
+Maintainer: Bence Magyar <bence.magyar.robotics@gmail.com>
+Installed-Size: 39.9 kB
+Depends: ros-foxy-diff-drive-controller, ros-foxy-effort-controllers, ros-foxy-forward-command-controller, ros-foxy-joint-state-broadcaster, ros-foxy-joint-state-controller, ros-foxy-joint-trajectory-controller, ros-foxy-position-controllers, ros-foxy-velocity-controllers, ros-foxy-ros-workspace
+Download-Size: 5,160 B
+APT-Manual-Installed: yes
+APT-Sources: http://packages.ros.org/ros2/ubuntu focal/main amd64 Packages
+Description: Metapackage for ROS2 controllers related packages
+```
+
+
+
+---
+
 ## r2d2_control4.launch.py (ros2_control_demo)
 
 ```shell
@@ -30,6 +72,7 @@ $ ros2 launch r2d2_control r2d2_control6.launch.py use_rviz:=false
 
 
 $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
+
 ```
 
 ---
