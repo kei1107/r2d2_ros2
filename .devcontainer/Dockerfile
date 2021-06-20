@@ -14,9 +14,10 @@ FROM athackst/ros2:foxy-dev
 
 RUN sudo sed -i.bak -e 's%http://[^ ]\+%mirror://mirrors.ubuntu.com/mirrors.txt%g' /etc/apt/sources.list
 
-RUN apt-get update \
-        && apt -y install ros-foxy-xacro \
-        && apt -y install ros-foxy-gazebo-ros
+RUN apt-get update
+
+RUN rosdep update \
+        && rosdep install -y -i --from-paths /workspaces/ros2_control_test/src
 
 # Set up auto-source of workspace for ros user
 ARG WORKSPACE

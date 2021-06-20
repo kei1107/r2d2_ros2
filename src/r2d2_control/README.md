@@ -36,6 +36,21 @@ APT-Sources: http://packages.ros.org/ros2/ubuntu focal/main amd64 Packages
 Description: Metapackage for ROS2 controllers related packages
 ```
 
+```
+ubuntu@ubuntu-VirtualBox:~/colcon_ws/src/ros2_control_test$ sudo apt show ros-foxy-gazebo-ros
+Package: ros-foxy-gazebo-ros
+Version: 3.5.3-1focal.20210513.213411
+Priority: optional
+Section: misc
+Maintainer: Jose Luis Rivero <jrivero@osrfoundation.org>
+Installed-Size: 3,288 kB
+Depends: libc6 (>= 2.14), libgazebo11 (>= 11.5.1), libgcc-s1 (>= 3.0), libignition-math6 (>= 6.8.0), libprotobuf17, libsdformat9 (>= 9.5.0), libstdc++6 (>= 9), ros-foxy-builtin-interfaces, ros-foxy-gazebo-dev, ros-foxy-gazebo-msgs, ros-foxy-geometry-msgs, ros-foxy-launch-ros, ros-foxy-rcl, ros-foxy-rclcpp, ros-foxy-rclpy, ros-foxy-rmw, ros-foxy-sensor-msgs, ros-foxy-std-srvs, ros-foxy-tinyxml-vendor, ros-foxy-ros-workspace
+Homepage: http://gazebosim.org/tutorials?cat=connect_ros
+Download-Size: 445 kB
+APT-Manual-Installed: yes
+APT-Sources: http://packages.ros.org/ros2/ubuntu focal/main amd64 Packages
+Description: Utilities to interface with Gazebo through ROS.
+```
 
 
 ---
