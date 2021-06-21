@@ -233,7 +233,7 @@ However, if you modify r2d2_control6.launch.py as follows, you get a different e
      # )
      load_joint_state_controller = ExecuteProcess(
 -        cmd=['ros2', 'control', 'load_start_controller', 'joint_state_broadcaster'],
-+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start' 'joint_state_broadcaster'],
++        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start', 'joint_state_broadcaster'],
          output='screen'
      )
  
