@@ -159,7 +159,7 @@ $ cd ../..
 $ colcon build --symlink-install
 ```
 
-#### Run r2d2_control5.launch.py
+#### Run r2d2_control4.launch.py
 
 ```shell
 [terminal 1]
