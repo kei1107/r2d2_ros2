@@ -31,18 +31,6 @@ def generate_launch_description():
             name='joint_state_publisher',
             output='screen',
             parameters=[{'use_sim_time': use_sim_time}]),
-        # Node(
-        #     package='gazebo_ros',
-        #     executable='spawn_entity.py',
-        #     name='spawn_entity',
-        #     output='screen',
-        #     arguments=[
-        #         '-entity', 'r2d2',
-        #         '-x', '0',
-        #         '-y', '0',
-        #         '-z', '1',
-        #         '-topic', '/robot_description'
-        #     ]),
 
         # controller
         Node(
