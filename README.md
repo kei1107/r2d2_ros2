@@ -123,6 +123,12 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 
 **Tips**
 
+---
+
+When controler_manager is stopped, the process may remain and affect the next execution.
+
+---
+
 If you want to use `teleop_twist_keyboard`, please make the following changes
 
 ```diff
@@ -171,6 +177,14 @@ $ source ~/dev_ws/install/setup.bash
 $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
 ```
 
+**Tips**
+
+---
+
+When controler_manager is stopped, the process may remain and affect the next execution.
+
+---
+
 ### For r2d2_control5.launch.py
 
 #### Build
@@ -188,6 +202,14 @@ $ ros2 launch r2d2_control r2d2_control5.launch.py use_rviz:=true
 $ source ~/dev_ws/install/setup.bash
 $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
 ```
+
+**Tips**
+
+---
+
+When controler_manager is stopped, the process may remain and affect the next execution.
+
+---
 
 ### For r2d2_control6.launch.py
 
@@ -216,6 +238,12 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 ```
 
 **Tips**
+
+---
+
+When gazebo or controler_manager is stopped, the process may remain and affect the next execution.
+
+---
 
 When run r2d2_control6.launch.py, the following warning occurs.
 
