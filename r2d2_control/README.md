@@ -71,25 +71,24 @@ $ colcon build --symlink-install
 ```shell
 $ git clone https://github.com/ros-simulation/gazebo_ros2_control
 $ cd gazebo_ros2_control
-$ git checkout 956e7706338fd4fd1a2ef733ad54740d07e9a67a
+$ git checkout 1b90ab1c4f28300e26d9f8c0a5bc56068e9abf55
 $ colcon_cd
 $ colcon build --symlink-install
 $ source install/setup.bash
 
-
 $ ros2 launch r2d2_control r2d2_control6.launch.py use_rviz:=false
-$ colcon_cd r2d2_control
-
-[WARN!!!!]
-# https://github.com/ros-controls/ros2_control/commit/98650ab73110a751e81f423e0c4fa4931d905799
-$ sudo cp /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py.old 
-$ sudo cp ./extra/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py
-
-$ ros2 launch r2d2_control r2d2_control6.launch.py use_rviz:=false
-
 
 $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
+```
 
+If you use `ros2 control load_controller --set_state start [controller name]`, then you need the following fixes.
+
+ref: https://github.com/ros-controls/ros2_control/commit/98650ab73110a751e81f423e0c4fa4931d905799
+
+
+```
+$ sudo cp /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py.old 
+$ sudo cp ./extra/load_controller.py /opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py
 ```
 
 ---
@@ -162,3 +161,31 @@ velocity_controllers/JointGroupVelocityController                      controlle
 > https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/fake_components_plugin_description.xml
 
 Generic components for simple faking of system hardware.
+
+---
+
+```
+[ros2-6] deprecated warning: Please use 'load_controller --set_state start'
+```
+
+However, the following error occurs
+
+```
+[gzserver-2] [INFO] [1624244554.396891018] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[ros2-5] Traceback (most recent call last):
+[ros2-5]   File "/opt/ros/foxy/bin/ros2", line 11, in <module>
+[ros2-5]     load_entry_point('ros2cli==0.9.9', 'console_scripts', 'ros2')()
+[ros2-5]   File "/opt/ros/foxy/lib/python3.8/site-packages/ros2cli/cli.py", line 67, in main
+[ros2-5]     rc = extension.main(parser=parser, args=args)
+[ros2-5]   File "/opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/command/control.py", line 37, in main
+[ros2-5]     return extension.main(args=args)
+[ros2-5]   File "/opt/ros/foxy/lib/python3.8/site-packages/ros2controlcli/verb/load_controller.py", line 44, in main
+[ros2-5]     if not args.state:
+[ros2-5] AttributeError: 'Namespace' object has no attribute 'state'
+[ERROR] [ros2-5]: process has died [pid 7250, exit code 1, cmd 'ros2 control load_controller --set-state start joint_state_broadcaster'].
+[INFO] [ros2-6]: process started with pid [7282]
+```
+
+Therefore, the following fixes are required
+
+https://github.com/ros-controls/ros2_control/commit/98650ab73110a751e81f423e0c4fa4931d905799

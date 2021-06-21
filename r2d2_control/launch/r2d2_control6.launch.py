@@ -10,7 +10,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
-    use_rviz = LaunchConfiguration('use_rviz', default='true')
+    use_rviz = LaunchConfiguration('use_rviz', default='false')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     pkg_r2d2_control = get_package_share_directory('r2d2_control')
@@ -45,21 +45,22 @@ def generate_launch_description():
             '-topic', '/robot_description'
         ])
 
-
-    # node_joint_state_publisher = Node(
-    #     package='joint_state_publisher',
-    #     executable='joint_state_publisher',
-    #     name='joint_state_publisher',
-    #     output='screen',
-    #     parameters=[{'use_sim_time': use_sim_time}])
+    # load_joint_state_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+    #          'joint_state_broadcaster'],
+    #     output='screen'
+    # )
     load_joint_state_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
-             'joint_state_broadcaster'],
+        cmd=['ros2', 'control', 'load_start_controller', 'joint_state_broadcaster'],
         output='screen'
     )
 
+    # load_joint_diff_drive_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'start', 'front_back_diff_drive_controller'],
+    #     output='screen'
+    # )
     load_joint_diff_drive_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start', 'front_back_diff_drive_controller'],
+        cmd=['ros2', 'control', 'load_start_controller', 'front_back_diff_drive_controller'],
         output='screen'
     )
 
