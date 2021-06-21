@@ -20,10 +20,8 @@ def generate_launch_description():
     urdf_file = os.path.join(pkg_r2d2_control,'urdf','r2d2_ros_control.urdf')
     sdf_file = os.path.join(pkg_r2d2_control,'urdf','r2d2_ros_control.sdf')
 
-    # load xacro
-    doc = xacro.process_file(xacro_file)
     # generate urdf
-    urdf_robot_desc = doc.toprettyxml(indent='  ')
+    urdf_robot_desc = Command(['xacro', ' ', xacro_file]).perform(LaunchContext())
     # write urdf file
     with open(urdf_file,'w') as f:
         f.write(urdf_robot_desc)
@@ -56,7 +54,7 @@ def generate_launch_description():
                 '-x', '0',
                 '-y', '0',
                 '-z', '1',
-                '-file', sdf_file,
+                '-file', sdf_robot_desc,
             ]
         ),
         Node(    

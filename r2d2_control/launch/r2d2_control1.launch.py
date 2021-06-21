@@ -21,6 +21,9 @@ def generate_launch_description():
     doc = xacro.process_file(xacro_file)
     # generate urdf
     robot_desc = doc.toprettyxml(indent='  ')
+    # or 
+    # robot_desc = Command(['xacro', ' ', xacro_file]).perform(LaunchContext())
+    
     # write urdf file
     with open(urdf_file,'w') as f:
         f.write(robot_desc)
