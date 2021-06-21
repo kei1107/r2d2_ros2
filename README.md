@@ -125,7 +125,7 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 
 ---
 
-When controler_manager is stopped, the process may remain and affect the next execution.
+When controller_manager is stopped, the process may remain and affect the next execution.
 
 ---
 
@@ -181,7 +181,7 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 
 ---
 
-When controler_manager is stopped, the process may remain and affect the next execution.
+When controller_manager is stopped, the process may remain and affect the next execution.
 
 ---
 
@@ -207,7 +207,7 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 
 ---
 
-When controler_manager is stopped, the process may remain and affect the next execution.
+When controller_manager is stopped, the process may remain and affect the next execution.
 
 ---
 
@@ -241,7 +241,7 @@ $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args 
 
 ---
 
-When gazebo or controler_manager is stopped, the process may remain and affect the next execution.
+When gazebo or controller_manager is stopped, the process may remain and affect the next execution.
 
 ---
 
