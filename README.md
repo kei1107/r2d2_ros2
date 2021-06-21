@@ -81,7 +81,7 @@ $ cd ..
 $ colcon build --symlink-install 
 ```
 
-### For r2d2_control(1|2|3).launch.py
+### r2d2_control(1|2|3).launch.py
 
 #### Build
 
@@ -151,7 +151,7 @@ After that, you can use `teleop_twist_keyboard`.
 $ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel_unstamped
 ```
 
-### For r2d2_control4.launch.py
+### r2d2_control4.launch.py
 
 #### Build (ros2_control_demos)
 
@@ -185,7 +185,7 @@ When controller_manager is stopped, the process may remain and affect the next e
 
 ---
 
-### For r2d2_control5.launch.py
+### r2d2_control5.launch.py
 
 #### Build
 
@@ -211,7 +211,7 @@ When controller_manager is stopped, the process may remain and affect the next e
 
 ---
 
-### For r2d2_control6.launch.py
+### r2d2_control6.launch.py
 
 #### Build
 
