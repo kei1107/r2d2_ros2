@@ -33,7 +33,7 @@ There are 6 launch files in `r2d2_control` package.
 
 ## Requirements  
 
-- ROS2foxy
+- ROS2 foxy
 
 ### My Environment
 
