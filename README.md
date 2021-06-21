@@ -117,6 +117,7 @@ $ source ~/dev_ws/install/setup.bash
 $ ros2 launch r2d2_control r2d2_control3.launch.py use_rviz:=true
 
 [terminal 2]
+$ source ~/dev_ws/install/setup.bash
 $ ros2 run teleop_twiststamped_keyboard teleop_twiststamped_keyboard --ros-args -r cmd_vel:=/front_back_diff_drive_controller/cmd_vel
 ```
 
