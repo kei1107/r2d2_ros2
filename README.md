@@ -38,6 +38,9 @@ There are 6 launch files in `r2d2_control` package.
 ### My Environment
 
 ```shell
+$ uname -a
+Linux ubuntu-VirtualBox 5.8.0-55-generic #62~20.04.1-Ubuntu SMP Wed Jun 2 08:55:04 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+
 $ cat /etc/lsb-release 
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=20.04
