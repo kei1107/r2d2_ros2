@@ -86,6 +86,7 @@ hardware_interface::return_type MyR2D2Hardware::configure(const hardware_interfa
 std::vector<hardware_interface::StateInterface> MyR2D2Hardware::export_state_interfaces(){
   std::vector<hardware_interface::StateInterface> state_interfaces;
   for (auto i = 0u; i < info_.joints.size(); i++){
+    RCLCPP_INFO(rclcpp::get_logger("MyR2D2Hardware"), "Joint '%s' : Export state interfaces",info_.joints[i].name.c_str());
     state_interfaces.emplace_back(hardware_interface::StateInterface(
       info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_positions_[i]));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
@@ -97,6 +98,7 @@ std::vector<hardware_interface::StateInterface> MyR2D2Hardware::export_state_int
 std::vector<hardware_interface::CommandInterface> MyR2D2Hardware::export_command_interfaces(){
   std::vector<hardware_interface::CommandInterface> command_interfaces;
   for (auto i = 0u; i < info_.joints.size(); i++){
+    RCLCPP_INFO(rclcpp::get_logger("MyR2D2Hardware"), "Joint '%s' : Export command interfaces",info_.joints[i].name.c_str());
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
       info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &hw_commands_[i]));
   }
@@ -113,6 +115,7 @@ hardware_interface::return_type MyR2D2Hardware::start(){
   // set some default values
   for (auto i = 0u; i < hw_positions_.size(); i++){
     if (std::isnan(hw_positions_[i])){
+      RCLCPP_INFO(rclcpp::get_logger("MyR2D2Hardware"), "Joint '%s' : Set some default values",info_.joints[i].name.c_str());
       hw_positions_[i] = 0;
       hw_velocities_[i] = 0;
       hw_commands_[i] = 0;
@@ -142,25 +145,25 @@ hardware_interface::return_type MyR2D2Hardware::stop(){
 }
 
 hardware_interface::return_type MyR2D2Hardware::read(){
-  RCLCPP_INFO(rclcpp::get_logger("MyR2D2Hardware"), "Reading...");
+  RCLCPP_INFO(rclcpp::get_logger("MyR2D2Hardware"), "Reading... %d commands",hw_commands_.size());
 
-  for (uint i = 0; i < hw_commands_.size(); i++){
+  for (auto i = 0u; i < hw_commands_.size(); i++){
     // Simply integrates
     
-    // command -> cmd_vel [m/s]
+    // command -> angular velocity [rad/s] -> velocity ( v = r * w)
     hw_positions_[i] = hw_positions_[i] + dt * hw_commands_[i];
     hw_velocities_[i] = hw_commands_[i];
 
     RCLCPP_INFO(
       rclcpp::get_logger("MyR2D2Hardware"),
-      "%d : Got position state %.5f and velocity state %.5f for '%s'!", hw_positions_[i],
+      "Got position state %.5f [rad] ( %.5f [m]) and velocity state %.5f for '%s'!", hw_positions_[i], hw_positions_[i] * wheel_radius,
       hw_velocities_[i], info_.joints[i].name.c_str());
   }
 
   // simple diffeerentiable kinematics : https://tajimarobotics.com/wheel_robot/  
-  double base_dx = 0.5 * (hw_commands_[0] + hw_commands_[1]) * cos(base_theta_);
-  double base_dy = 0.5 * (hw_commands_[0] + hw_commands_[1]) * sin(base_theta_);
-  double base_dtheta = (hw_commands_[0] - hw_commands_[1]) / wheel_separation;
+  double base_dx = 0.5 * wheel_radius * (hw_commands_[0] + hw_commands_[1]) * cos(base_theta_);
+  double base_dy = 0.5 * wheel_radius * (hw_commands_[0] + hw_commands_[1]) * sin(base_theta_);
+  double base_dtheta = wheel_radius * (hw_commands_[0] - hw_commands_[1]) / wheel_separation;
   base_x_ += base_dx * dt;
   base_y_ += base_dy * dt;
   base_theta_ += base_dtheta * dt;
