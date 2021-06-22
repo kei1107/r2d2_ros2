@@ -13,9 +13,12 @@ I used a simple R2D2 model, customized with R2D2 model of  http://wiki.ros.org/u
 If this repository doesn't work for you, please refer to the "latest" information.
 
 - [ros2 control documents](https://ros-controls.github.io/control.ros.org/index.html)
-- [ros2 control demos(github)](https://github.com/ros-controls/ros2_control_demos)
 - [ros control roadmap](https://github.com/ros-controls/roadmap)
+- [ros2_control(github)](https://github.com/ros-controls/ros2_control)
+- [ros2_controllers(github)](https://github.com/ros-controls/ros2_controllers)
+- [ros2 control demos(github)](https://github.com/ros-controls/ros2_control_demos)
 - [gazebo_ros2_control(github)](https://github.com/ros-simulation/gazebo_ros2_control)
+
 ---
 
 
