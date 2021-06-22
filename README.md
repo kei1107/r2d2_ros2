@@ -26,8 +26,8 @@ There are 6 launch files in `r2d2_control` package.
 
 |  launch  |  description  |
 | ---- | ---- |
-|  r2d2_control1.launch.py  |  Using libgazebo_ros_diff_drive, spawn from urdf file  |
-|  r2d2_control2.launch.py  |  Using libgazebo_ros_diff_drive, spawn from /robot_description topic  |
+|  r2d2_control1.launch.py  |  Using libgazebo_ros_diff_drive (ros_control) , spawn from urdf file  |
+|  r2d2_control2.launch.py  |  Using libgazebo_ros_diff_drive (ros_control) , spawn from /robot_description topic  |
 |  r2d2_control3.launch.py  |  Using ros2_control  |
 |  r2d2_control4.launch.py  |  Using ros2_control and DiffBotSystemHardware plugin. See [here](https://github.com/ros-controls/ros2_control_demos#example-4-differential-drive-mobile-robot) for DiffBotSystemHardware.   |
 |  r2d2_control5.launch.py  |  Using ros2_control and my_r2d2_hardware plugin.  |
