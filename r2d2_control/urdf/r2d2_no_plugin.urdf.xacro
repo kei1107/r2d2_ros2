@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot name="r2d2" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="width" value="0.2" />
+  <xacro:property name="leglen" value="0.6" />
+  <xacro:property name="polelen" value="0.2" />
+  <xacro:property name="bodylen" value="0.6" />
+  <xacro:property name="baselen" value="0.4" />
+  <xacro:property name="wheeldiam" value="0.07" />
+
+  <xacro:include filename="$(find r2d2_control)/urdf/utils_no_plugin.urdf.xacro"/>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${width}" length="${bodylen}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${width}" length="${bodylen}"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="10"/>
+  </link>
+
+  <xacro:leg prefix="right" reflect="-1" />
+  <xacro:leg prefix="left" reflect="1" />
+ 
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="${width}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${width}"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="2"/>
+  </link>
+
+  <joint name="head_swivel" type="fixed">
+    <parent link="base_link"/>
+    <child link="head"/>
+    <origin xyz="0 0 ${bodylen/2}"/>
+  </joint>
+  <link name="box">
+    <visual>
+      <geometry>
+        <box size="0.08 0.08 0.08"/>
+      </geometry>
+      <material name="blue"/>
+      <origin xyz="-0.04 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.08 0.08 0.08"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="1"/>
+  </link>
+
+  <joint name="tobox" type="fixed">
+    <parent link="head"/>
+    <child link="box"/>
+    <origin xyz="${.707*width+0.04} 0 ${.707*width}"/>
+  </joint>
+</robot>
