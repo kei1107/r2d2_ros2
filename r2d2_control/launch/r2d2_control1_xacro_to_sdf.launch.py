@@ -54,7 +54,7 @@ def generate_launch_description():
                 '-x', '0',
                 '-y', '0',
                 '-z', '1',
-                '-file', sdf_robot_desc,
+                '-file', sdf_file,
             ]
         ),
         Node(    
