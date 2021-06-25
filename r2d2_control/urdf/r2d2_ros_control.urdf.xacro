@@ -94,8 +94,8 @@
       <right_joint>right_back_wheel_joint</right_joint>
 
       <!-- kinematics -->
-      <wheel_separation>${width}</wheel_separation>
-      <wheel_separation>${width}</wheel_separation>
+      <wheel_separation>0.44</wheel_separation>
+      <wheel_separation>0.44</wheel_separation>
 
       <wheel_diameter>${wheeldiam}</wheel_diameter>
       <wheel_diameter>${wheeldiam}</wheel_diameter>
